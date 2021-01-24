@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+
+  server:
+    container_name: Socket_Server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - "9898:9898"
+    volumes:
+      - ./server:/server
+
+  client:
+    network_mode: host
+    container_name: Socket_Client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    restart: on-failure
+    volumes:
+      - ./client:/client
